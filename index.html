@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>yowz</title>
+
+<style>
+body {
+  background-color: #111;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, p, a {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+
+h1 { animation-delay: 0.2s; }
+h2 { animation-delay: 0.4s; }
+h3 { animation-delay: 0.6s; }
+p  { animation-delay: 0.8s; }
+a  { animation-delay: 1s; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+button {
+  margin-top: 20px;
+  cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<button onclick="playMusic(); this.innerText='hehe boi';">
+  CLICK ME (myusik)
+</button>
+
+<center>
+<marquee>🔥 wilkam 2 may ipik wibsayt 🔥</marquee>
+<h1>its 2am and im doing this</h1>
+<h2>gift me some games, i like RE.</h2>
+<h3>heheboi, tank u</h3>
+</center>
+
+<p align="center">gift me some games from steam so i could get motivated into doing HTML yh</p>
+
+<div style="text-align: center;">
+<a href="https://steamcommunity.com/id/XT4R/">my Steam profile</a>!
+</div>
+
+<br><br><br>
+
+<img src="https://www.image2url.com/r2/default/images/1776105747430-79283f84-6899-43e4-9ece-606c2c6b7091.png" alt="image" width="250" />
+
+<center>
+<h4>if you see that, then yay, dats me</h4>
+<h5>ok. bye.</h5>
+</center>
+
+<audio id="music" loop>
+  <source src="intheend.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function playMusic() {
+  const audio = document.getElementById("music");
+  audio.play();
+}
+</script>
+
+</body>
+</html>

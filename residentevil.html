@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resident Evil-Mikay12</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+
+.hackText {
+  color: red;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  text-shadow: 
+     0 0 5px darkred,
+     0 0 10px red,
+     0 0 20px darkred;
+  animation: flickerText 1.5s infinite;
+}
+
+@keyframes flickerText {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.4; }
+}
+
+#hackScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#hackScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+#umbrellaFlash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#umbrellaFlash img {
+  width: 200px;
+  filter: drop-shadow(0 0 20px red);
+  transform: scale(0.8);
+}
+
+#fadeScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px red;
+}
+
+
+.favorite {
+  border: 3px solid red;
+  border-radius: 12px;
+  box-shadow: 0 0 20px red, 0 0 40px darkred, 0 0 60px red;
+  transition: transform 0.3s;
+}
+
+.favorite:hover {
+  transform: scale(1.07);
+}
+
+body {
+  background-image: url("https://i.pinimg.com/1200x/ee/de/f4/eedef46f12cbcf18ca33db8f75d473b1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: white;
+  font-family: Arial;
+  text-align: center;
+
+  min-height: 200vh;
+}
+
+    h1 {
+      color: red;
+      text-shadow: 0 0 10px darkred;
+    }
+
+.box {
+  width: 90%;
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid darkred;
+  background-color: #111;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.jill-selected {
+  border: 2px solid gold;
+  box-shadow: 0 0 20px gold, 0 0 40px orange;
+  border-radius: 12px;
+}
+
+.character {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid red;
+  width: 180px;
+  vertical-align: top;
+  background: #111;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.character:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px red;
+}
+
+.character img {
+  width: 150px;
+  border-radius: 10px;
+}
+
+.jill {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.jill:hover {
+  border: 2px solid gold;
+}
+
+.jill.active {
+  border: 3px solid gold;
+}
+
+.umbrella {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.umbrella img {
+  width: 45px;
+  animation: spin 10s linear infinite;
+  filter: drop-shadow(0 0 6px red);
+}
+
+.umbrella span {
+  color: red;
+  font-family: monospace;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px darkred;
+}
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .blood {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, red, darkred, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(2); }
+    }
+
+.music-btn {
+  background-color: black;
+  color: red;
+  text-shadow: 0 0 5px darkred, 0 0 10px red;
+  border: 2px solid darkred;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 18px;
+  transition: 0.2s;
+  animation: flickerText 1.5s infinite;
+}
+
+.music-btn:hover {
+  color: white;
+  text-shadow: 0 0 12px red, 0 0 20px darkred;
+  box-shadow: 0 0 15px red;
+}
+
+@keyframes flickerText {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.4;
+  }
+}
+
+    #menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .menu-btn {
+      padding: 10px 20px;
+      background: black;
+      color: red;
+      border: 2px solid darkred;
+      cursor: pointer;
+    }
+
+.big-character {
+  width: 250px;
+  padding: 15px;
+}
+
+.big-character img {
+  width: 220px;
+  height: auto;
+  border-radius: 12px;
+}
+
+.big-character p {
+  font-size: 18px;
+}
+
+.character.profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.character.profile img {
+  width: 250px;
+  height: auto;
+  border-radius: 12px;
+}
+
+.character.profile .info {
+  text-align: left;
+}
+
+.character.profile .info h3 {
+  margin-top: 0;
+  color: red;
+}
+
+.character.profile.favorite {
+  transform: scale(1.05);
+  border: 2px solid red;
+  padding: 20px;
+}
+
+.character.profile.favorite img {
+  width: 300px;
+}
+
+.character.profile.favorite {
+  box-shadow: 0 0 25px red, 0 0 60px darkred, 0 0 80px red;
+}
+
+.character.profile.favorite:hover {
+  transform: scale(1.08);
+}
+
+.horizontal-stack {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.horizontal-stack img {
+  width: 200px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px red;
+}
+
+.horizontal-stack .bio {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: white;
+}
+
+.horizontal-stack .bio h3 {
+  margin: 0 0 10px 0;
+  color: gold;
+  text-shadow: 0 0 5px darkred;
+}
+
+.horizontal-stack .bio p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 16px;
+  color: #f0f0f0;
+  text-align: left;
+}
+
+.card.gold {
+  border: 2px solid gold;
+  box-shadow: 0 0 15px gold, 0 0 35px orange;
+}
+
+.card.silver {
+  border: 2px solid silver;
+  box-shadow: 0 0 15px silver, 0 0 25px gray;
+}
+
+.card.bronze {
+  border: 2px solid #cd7f32;
+  box-shadow: 0 0 15px #cd7f32, 0 0 25px darkred;
+}
+
+.vertical-stack .card:hover {
+  transform: scale(1.05);
+}
+
+document.querySelectorAll('img[src*="0a17a05c50cc83e5311f6a2c2e3e258d.jpg"]').forEach(img => {
+  img.style.cursor = 'pointer'; // show it's clickable
+  img.addEventListener('click', playJillVoice);
+});
+
+.jill-card {
+  border: 3px solid gold;
+  box-shadow: 0 0 25px gold, 0 0 50px orange, 0 0 75px darkorange;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.jill-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px gold, 0 0 70px orange, 0 0 100px darkorange;
+}
+
+  </style>
+</head>
+
+
+<body>
+
+<div id="hackScreen">
+  <div class="hackText">BREACHING UMBRELLA DATABASE...</div>
+</div>
+
+<div id="fadeScreen"></div>
+
+<div id="umbrellaFlash">
+  <img src="t.png" alt="">
+</div>
+
+<div id="menu">
+  <h1>RESIDENT EVIL</h1>
+ <button class="music-btn" onclick="breachUmbrella()">
+  ACCESS: UMBRELLA DATABASE
+</button>
+
+</div>
+
+<div id="gameContent" style="display:none;">
+
+  <div class="umbrella">
+    <img src="t.png" alt="Umbrella Corporation">
+    <span>Umbrella Corporation</span>
+  </div>
+
+  <h1>BY MIKAY@12</h1>
+
+<a href="https://steamcommunity.com/id/XT4R/" target="_blank">
+  <button class="music-btn">Turn music off/on</button>
+</a>
+
+<a href="ME.html" target="_blank">
+ <button class="BY XT4R">BY XT4R</button>
+</a>
+
+<audio id="music" loop preload="auto">
+  <source src="RE0sr.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="re_startvoiceresidentevil">
+<source src="re_startvoiceresidentevil.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="jillVoice">
+  <source src="youwantstars.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="graceVoice">
+  <source src="grace.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="adaVoice">
+  <source src="sorrybigguy.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="leonVoice">
+  <source src="leon.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="weskerVoice">
+  <source src="7wesker.mp3" type="audio/mpeg">
+</audio>
+
+<div class="box hidden">
+  <h1  style="background-color: White">FAVOURITES</h1>
+   <h3>click their pictures!</h3>
+
+<div class="box">
+  <div class="horizontal-stack jill-selected">
+    
+    <img src="JillValentine.jpeg" alt="Jill Valentine" class="jill">
+
+    <div class="bio">
+      <h3>Jill Valentine</h3>
+      <h1>!SPECIAL!OG!</h1>
+      <p>
+        Survivor of the Arklay Mountain, Spencer Mansion incident, Raccoon City,
+        and the brainwashing of Albert Wesker. Former S.T.A.R.S Alpha Team member
+        and BSAA Special Operations Agent.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<div class="box">
+  <div class="horizontal-stack">
+    <img src="Grace.jpeg" class="grace">
+    <div class="bio">
+      <h3>Grace Ashcroft</h3>
+      <h1>!NEW!</h1>
+      <p>
+       Adoptive daughter of Oswell E. Spencer and Alyssa Ashcroft. Survivor of Wrenwood Hotel and Rhodes Hill Chronic Care Center. She works for the FBI as an Intelligence Analyst, she was sent by her boss, Nathan Dempsy, to investigae the Wrenwood Hotel, which was where her mother, Alyssa, had died eight(8) years ago. She passed out after being choked by Dr. Gideon, and soon woke up at Rhodes Hill Chronic Care Center, where she met 49 year old Leon S. Kennedy and her adoptive daughter, Emily.</p>
+  </div>
+ </div>
+</div>
+
+<div class="box">
+  <div class="horizontal-stack">
+    <img src="adaaa.jpg" class="ada">
+    <div class="bio">
+      <h3>Ada Wong</h3>
+      <h1>!OG!</h1>
+      <p>
+        Mysterious Chinese-American spy. Saved Leon multiple times in RE2, RE4, and RE6.
+        Formerly worked for Albert Wesker, but soon went independent after learning his true intentions with the Las Plagas virus sample.</p>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <h2 style="background-color: #EB664B">Main Protagonists</h2>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/6a/cc/15/6acc15883ea2f3f034013447cf54d460.jpg" alt="Leon S. Kennedy" class="leon">
+    <p>LEON S. KENNEDY</p>
+    <p>Rookie cop during the Raccoon City outbreak, later becomes a government agent. Known for his courage and quick thinking.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/1200x/da/d3/10/dad310c46252241e3514bd976bb86149.jpg" alt="Claire Redfield">
+    <p>CLAIRE REDFIELD</p>
+    <p>Chris Redfield's sister and survivor of the Raccoon City outbreak. Strong-willed and resourceful in the face of danger.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/fc/d9/77/fcd97777799dc69e1d224205dc96c6dd.jpg" alt="Chris Redfield">
+    <p>CHRIS REDFIELD</p>
+    <p>Elite S.T.A.R.S. member and BSAA agent. Fights tirelessly against bioterrorism.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/03/31/78/033178fd0ba6d805db73fe51ab9cd097.jpg" alt="Sheva Alomar">
+    <p>SHEVA ALOMAR</p>
+    <p>BSAA agent from Africa, skilled in combat and teamwork. Partners with Chris Redfield to stop a viral threat.</p>
+  </div>
+
+    <div class="character">
+    <img src="https://i.pinimg.com/736x/bc/bf/69/bcbf69fbea0e113443886a86cd8bb90c.jpg" alt="Ethan Winters">
+    <p>ETHAN WINTERS</p>
+    <p>Protagonist of Resident Evil 7 & 8. Ordinary man pulled into bioterror horror while searching for his wife Mia.</p>
+  </div>
+</div>
+
+
+<div class="box">
+  <h2 style="background-color: #EB664B">Main Antagonists</h2>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/8d/ee/dd/8deedd4addbe4c6cd53bcd2dd4d61cc4.jpg" alt="Mr. X">
+    <p>MR. X</p>
+    <p>Tyrant model T-00, relentless hunter designed to eliminate S.T.A.R.S. members. Iconic for its terrifying persistence.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/13/69/e5/1369e54e46d674c04bd3471ef7394fe0.jpg" alt="Nemesis">
+    <p>NEMESIS</p>
+    <p>Bio-organic weapon created to hunt down surviving S.T.A.R.S. agents. Carries a rocket launcher and never stops pursuing its target.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/76/a8/b1/76a8b1b4d5bc8a6a2924b98761c4450c.jpg" alt="Albert Wesker" class="wesker">
+    <p>ALBERT WESKER</p>
+    <p>Recurring antagonist with superhuman abilities and grand plans for global viral domination.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/1200x/6e/1a/11/6e1a113f2e98f45f79b3ef70c3045414.jpg" alt="William Birkin">
+    <p>WILLIAM BIRKIN</p>
+    <p>Scientist behind the G-Virus, mutated into a monstrous form after infection. Ruthless and obsessed with his research.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/72/10/bc/7210bc09e7ede0055d434ed6e75b3c06.jpg" alt="Oswell E. Spencer">
+    <p>OSWELL E. SPENCER</p>
+    <p>He was an aristocratic British billionaire, virologist and eugenicist. ne of the founding members of Umbrella Corporation.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/fd/b4/55/fdb455f7a7769db8d218b46488b5d25c.jpg" alt="Jack Baker">
+    <p>JACK BAKER</p>
+    <p>Head of the Baker family infected by the Mold. Almost impossible to kill, relentlessly attacking intruders in his home.</p>
+  </div>
+</div>
+
+
+<div class="box">
+  <h2>Other Protagonists</h2>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/aa/ba/a5/aabaa55d131a762ae80f9e52d8d58493.jpg" alt="Carlos Oliveira">
+    <p>CARLOS OLIVEIRA</p>
+    <p>U.S. Umbrella Biohazard Countermeasure Service (U.B.C.S.) soldier in Raccoon City. Skilled fighter, helps Jill escape the outbreak.</p>
+  </div>
+
+ <div class="character">
+    <img src="https://i.pinimg.com/736x/83/82/01/838201dcf97a036c011101222a123e6b.jpg" alt="Ashley Graham">
+    <p>ASHLEY GRAHAM</p>
+    <p>U.S. president's daughter, targeted by the Los Illuminados cult. Requires protection and guidance during her rescue.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/09/f8/4f/09f84fd58aba0654ed53f0678d15d5e4.jpg" alt="Mia Winters">
+    <p>MIA WINTERS</p>
+    <p>Ethan's wife, infected by the Mold in Resident Evil 7. Key to unraveling the Baker family nightmare.</p>
+  </div>
+
+<div class="character">
+    <img src="https://i.pinimg.com/736x/e4/d0/f1/e4d0f1410ba39d6b633ac5dac7c530eb.jpg" alt="Rebecca Chambers">
+    <p>REBECCA CHAMBERS</p>
+    <p>Survivor of the Arklay Mansion Incident. Protagonist of Residen Evil 0 and Resident Evil 1996-2002, but only if you play as Chris Redfield. Former member of S.T.A.R.S - Bravo Team and BSAA as an Advisor.</p>
+  </div>
+
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/5b/12/9a/5b129aaa10cf286634176e0f683fc6cc.jpg" alt="Sherry Birkin">
+    <p>SHERRY BIRKIN</p>
+    <p>Survivor of Raccoon City. Daughter of William and Annette Birkin. Helps protagonists in Resident Evil 2 & 6.</p>
+  </div>
+
+
+
+<div class="box">
+  <h2>Other Antagonists</h2>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/bf/69/23/bf692327869db152f5bfea9788bed3d5.jpg" alt="Lady Dimitrescu">
+    <p>LADY ALCINA DIMİTRESCU</p>
+    <p>Vampiric matriarch of Castle Dimitrescu in Resident Evil Village. Towering and terrifying, controls her daughters and minions.</p>
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/1200x/4a/d6/a1/4ad6a1b17fb1325775a60dfc314a96f8.jpg" alt="Mother Dimitrescu">
+    <p>DIMİTRESCU SISTERS (Daughters)</p>
+    <p>Three deadly daughters who serve Lady Dimitrescu, attacking intruders in the castle with incredible agility and ferocity.</p>
+    <p>Bela | Cassandra | Daniela
+  </div>
+
+  <div class="character">
+    <img src="https://i.pinimg.com/736x/bf/2b/22/bf2b229c4f17118a2b2ca1f0470a7bfc.jpg" alt="Mother Miranda">
+    <p>MOTHER MIRANDA</p>
+    <p>Powerful and manipulative antagonist of Resident Evil Village. Orchestrates the creation of the Four Lords and the Mold outbreak.</p>
+  </div>
+</div>
+
+  <p style="background-color: #EB664B">STORY</p>
+
+<div class="box">
+  <h2>Origins of the Outbreak</h2>
+  <p>
+    The nightmare began with the Umbrella Corporation, a powerful pharmaceutical company hiding dark secrets.
+    Behind closed doors, Umbrella developed the T-Virus — a biological weapon capable of reanimating the dead
+    and mutating living organisms into horrific creatures.
+  </p>
+</div>
+
+<div class="box">
+  <h2>The T-Virus</h2>
+  <p>
+    The T-Virus attacks the human body at a cellular level, rewriting DNA and destroying the nervous system.
+    Most infected become zombies — slow, aggressive, and driven by hunger.
+    Others mutate into powerful Bio-Organic Weapons (B.O.W.s).
+  </p>
+</div>
+
+<div class="box">
+  <h2>The G-Virus</h2>
+  <p>
+    The G-Virus is a powerful mutagen created by Dr. William Birkin that causes rapid, uncontrollable evolution.
+    It transforms hosts into constantly mutating creatures with extreme regeneration and strength.
+    Infected beings lose their humanity and become unstable bio-weapons driven by instinct and reproduction.
+  </p>
+</div>
+
+<div class="box">
+  <h2>Raccoon City Incident</h2>
+  <p>
+    In 1998, the virus was accidentally released in Raccoon City.
+    Within days, the entire population was infected.
+    Survivors like Jill Valentine, Claire Redfield, Carlos Olivera and Leon S. Kennedy fought to escape as the city descended into chaos.
+  </p>
+</div>
+
+<div class="box">
+  <h2>Umbrella's Downfall</h2>
+  <p>
+    After the Raccoon City disaster, the truth about Umbrella began to surface.
+    The company was eventually exposed and taken down, but the damage was already done.
+    The virus had spread, and new threats continued to emerge around the world.
+  </p>
+</div>
+
+<div class="box">
+  <h2>Bio-Organic Weapons</h2>
+  <p>
+    From Tyrants to Hunters, Umbrella's experiments created deadly creatures designed for warfare.
+    These monsters are stronger, faster, and far more dangerous than ordinary zombies.
+  </p>
+</div>
+
+<div class="box">
+  <h2>A Never-Ending Nightmare</h2>
+  <p>
+    Even after Umbrella's fall, bioterrorism continues.
+    New viruses, new outbreaks, and new horrors keep emerging.
+    yeah ur cooked if ur not leon kennedy or jill valentine... or any of the main characters.
+  </p>
+
+<div class="box" id="shootingRangeBox">
+  <h2>Zombie Shooting Range</h2>
+  <p>Click the zombies before they disappear!</p>
+<div id="shootingArea" style="position: relative; height: 300px; background: #222; border: 2px solid red; overflow: hidden;"></div>
+  <p>Score: <span id="shootScore">0</span></p>
+  <button class="music-btn" onclick="startShootingRange()">Start Shooting Range</button>
+</div>
+
+</div>
+
+<script>
+function breachUmbrella() {
+  const screen = document.getElementById("hackScreen");
+  const text = document.querySelector(".hackText");
+
+  screen.style.opacity = "1";
+  text.innerText = "BREACHING UMBRELLA DATABASE...";
+
+  let dots = 0;
+  const loading = setInterval(() => {
+    dots = (dots + 1) % 4;
+    text.innerText = "BREACHING UMBRELLA DATABASE" + ".".repeat(dots);
+  }, 300);
+
+  setTimeout(() => {
+    clearInterval(loading);
+    text.innerText = "ACCESSING CORE FILES...";
+
+    setTimeout(() => {
+      text.innerText = "FIREWALL BYPASSED";
+
+      setTimeout(() => {
+        text.innerText = "ACCESS GRANTED";
+
+        setTimeout(() => {
+          screen.style.opacity = "0";
+          text.innerText = "BREACHING UMBRELLA DATABASE...";
+
+          startGame();
+
+        }, 900);
+
+      }, 700);
+
+    }, 700);
+
+  }, 2000);
+}
+
+function startGame() {
+  const fade = document.getElementById("fadeScreen");
+  const flash = document.getElementById("umbrellaFlash");
+  const voice = document.getElementById("re_startvoiceresidentevil");
+  const music = document.getElementById("music");
+
+  fade.style.opacity = "1";
+
+  setTimeout(() => {
+    flash.style.opacity = "1";
+
+    voice.currentTime = 0;
+    voice.play().catch(() => console.log("Voice blocked"));
+
+    voice.onended = () => {
+      flash.style.opacity = "0";
+
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("gameContent").style.display = "block";
+
+      fade.style.opacity = "0";
+
+      music.currentTime = 0;
+      music.play().catch(() => console.log("Music blocked"));
+    };
+
+  }, 600);
+}
+
+document.addEventListener("click", function(e) {
+  const blood = document.createElement("div");
+  blood.className = "blood";
+
+  blood.style.left = e.pageX - 40 + "px";
+  blood.style.top = e.pageY - 40 + "px";
+
+  document.body.appendChild(blood);
+
+  setTimeout(() => blood.remove(), 1000);
+});
+
+let score = 0;
+let shootingInterval;
+
+function startShootingRange() {
+  const area = document.getElementById('shootingArea');
+  const scoreDisplay = document.getElementById('shootScore');
+
+  area.innerHTML = '';
+  score = 0;
+  scoreDisplay.innerText = score;
+
+  shootingInterval = setInterval(() => {
+    const zombie = document.createElement('div');
+    zombie.style.position = 'absolute';
+    zombie.style.width = '50px';
+    zombie.style.height = '50px';
+    zombie.style.background = 'green';
+    zombie.style.borderRadius = '50%';
+    zombie.style.left = Math.random() * (area.clientWidth - 50) + 'px';
+    zombie.style.top = Math.random() * (area.clientHeight - 50) + 'px';
+    zombie.style.cursor = 'pointer';
+    zombie.className = 'zombie';
+
+    zombie.onclick = function() {
+      score += 1;
+      scoreDisplay.innerText = score;
+      zombie.remove();
+    };
+
+    area.appendChild(zombie);
+
+    setTimeout(() => {
+      if (zombie.parentNode) zombie.remove();
+    }, 2000);
+
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(shootingInterval);
+    alert('Shooting range finished! Your score: ' + score);
+  }, 30000);
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
+
+document.querySelectorAll(".jill").forEach(img => {
+  img.addEventListener("click", () => {
+    const audio = document.getElementById("jillVoice");
+
+    img.classList.toggle("active");
+
+    if (!audio.paused) {
+      audio.currentTime = 0;
+    } else {
+      audio.play().catch(() => console.log("Jill voice blocked"));
+    }
+  });
+});
+
+document.querySelectorAll(".grace").forEach(img => {
+  img.addEventListener("click", () => {
+    const audio = document.getElementById("graceVoice");
+    audio.currentTime = 0; // restart if already playing
+    audio.play().catch(() => console.log("Grace voice blocked"));
+  });
+});
+
+document.querySelectorAll(".leon").forEach(img => {
+  img.addEventListener("click", () => {
+    const audio = document.getElementById("leonVoice");
+    audio.currentTime = 0; // restart if already playing
+    audio.play().catch(() => console.log("Leon voice blocked"));
+  });
+});
+
+document.querySelectorAll(".wesker").forEach(img => {
+  img.addEventListener("click", () => {
+    const audio = document.getElementById("weskerVoice");
+    audio.currentTime = 0; // restart if already playing
+    audio.play().catch(() => console.log("Wesker voice blocked"));
+  });
+});
+
+document.querySelectorAll(".ada").forEach(img => {
+  img.addEventListener("click", () => {
+    const audio = document.getElementById("adaVoice");
+    audio.currentTime = 0; // restart if already playing
+    audio.play().catch(() => console.log("Ada voice blocked"));
+  });
+});
+
+</script>
+
+</body>
+</html>
