@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mikay12</title>
+
+<style>
+body {
+  background-color: #000;
+  color: #00ff66;
+  font-family: monospace;
+  margin: 0;
+  padding: 30px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 102, 0.08),
+    rgba(0, 255, 102, 0.08) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  animation: scanMove 0.8s linear infinite;
+}
+
+@keyframes scanMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(10px); }
+}
+
+#introScreen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #120000, black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#terminal {
+  margin-top: 20px;
+  color: #ff4d4d;
+  font-size: 14px;
+  min-height: 60px;
+  white-space: pre-line;
+}
+
+.glitchText {
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 0 10px red;
+}
+
+.subText {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+button {
+  background: transparent;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+  padding: 8px 15px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:disabled {
+  opacity: 0.4;
+}
+
+#mainContent {
+  display: none;
+}
+
+h1 { font-size: 48px; }
+.tagline { color: #888; margin-bottom: 40px; }
+
+.section { margin-top: 40px; }
+
+.box {
+  border: 1px solid #333;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #333;
+}
+
+a {
+  color: #ff4d4d;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div id="introScreen">
+  <div class="glitchText">SYSTEM BREACH DETECTED</div>
+  <div class="subText">XT4R CORE ACCESSING...</div>
+
+  <div id="terminal"></div>
+
+  <button id="enterBtn" onclick="enterSite()" disabled>...LOCKED...</button>
+</div>
+
+<audio id="bg-music" loop>
+  <source src="Decode.mp3" type="audio/mpeg">
+</audio>
+
+<div id="mainContent">
+
+  <h1 id="typing-name">PROFILE</h1>
+  <p class="tagline">--- How did we get here?</p>
+
+  <div class="section">
+    <h2>XT4R</h2>
+    <div class="profile-container">
+      <img src="LC.jpeg" class="profile-img">
+      <div class="box">
+        Alias: XT4R | Mikay12<br>
+        Role: Business of Misery<br>
+        Status: Discovering the Waterfront
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Intrests</h2>
+    <div class="box">
+      Music, video-games, art, coding, cars, hidden things.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>stuff</h2>
+    <div class="box">
+      Call me XT4R, pronounced Star.
+   I got it from a celestial event, yes, a CELESTIAL EVENT. I replaced the S with X because Nissan 180SX.<br>
+---Would you believe that a 12-year-old created this? Probably not, but that's fine.<br>
+<br>
+--I'm learning Spanish and Portuguese. I suck at Portuguese, my Spanish is limited.<br>
+So I technically speak 4 languages... Filipino, English, Spanish, and Portuguese<br>
+<br>
+[...]Hola soy Xt4r, tengo doce anyos, vivo en la Filipinas.<br>
+<br>
+--My mom's a rapper.<br>
+<br>
+----My dream car is a 1973 Datsun/Fairlady 240z, would get it painted yellow like Isabel Neves from Fast X because she's cool. I have a Tomica of it but from Wangan Midnight.
+-I like mountain dew and money, so I could buy more mountain dews.<br>
+<br>
+i love Paramore. who doesn't?
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Networks</h2>
+    <div class="box">
+      <a href="https://steamcommunity.com/id/XT4R/" target="_blank">STEAM</a>
+     <a href="https://github.com/XT4R-13" target="_blank">GITHUB</a>
+      <a href= "https://xt4r-13.itch.io/" target="_blank">ITCH.IO</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Project(s)</h2>
+    <div class="box">
+      <a href="index.html">My first HTML</a><br>
+      <a href="residentevil.html">Resident Evil</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const lines = [
+  "> initializing XT4R core...",
+  "> bypassing firewall...",
+  "> decrypting data...",
+  "> access granted."
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeTerminal() {
+  if (lineIndex >= lines.length) {
+    document.getElementById("enterBtn").disabled = false;
+    document.getElementById("enterBtn").innerText = "OVERRIDE ACCESS";
+    return;
+  }
+
+  let terminal = document.getElementById("terminal");
+  let currentLine = lines[lineIndex];
+
+  if (charIndex < currentLine.length) {
+    terminal.innerHTML += currentLine.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeTerminal, 30);
+  } else {
+    terminal.innerHTML += "\n";
+    lineIndex++;
+    charIndex = 0;
+    setTimeout(typeTerminal, 400);
+  }
+}
+
+function enterSite() {
+  const music = document.getElementById("bg-music");
+  const intro = document.getElementById("introScreen");
+
+  if (music) {
+    music.volume = 0.3;
+    music.play();
+  }
+
+  intro.style.opacity = "0";
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+    typeName();
+  }, 800);
+}
+
+function typeName() {
+  let text = "XT4R";
+  let i = 0;
+  const el = document.getElementById("typing-name");
+  el.innerHTML = "";
+
+  function type() {
+    if (i < text.length) {
+      el.innerHTML += text[i];
+      i++;
+      setTimeout(type, 120);
+    }
+  }
+
+  type();
+}
+
+typeTerminal();
+</script>
+
+</body>
+</html>
